@@ -2,7 +2,6 @@
 include_once("services/redirection.php");
 
 session_start();
-print_r($_SESSION);
 ?>
 
 
@@ -18,13 +17,15 @@ print_r($_SESSION);
 
 <body class="bg-[#1B1B1B]">
 
-    <header class="absolute inset-x-0 top-0 z-50 bg-[#2C2C2C] text-white">
-        <nav class="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
+    <header class="inset-x-0 top-0 z-50 bg-[#2C2C2C] text-white">
+        <nav class="flex items-center justify-between p-4 lg:px-8" aria-label="Global">
+            <!-- Logo Container -->
             <div class="flex lg:flex-1">
                 <a href="/" class="-m-1.5 p-1.5 text-xl">
                     <h1>IKarRental</h1>
                 </a>
             </div>
+            <!-- Button Container -->
             <?php if (isset($_SESSION['user'])): ?>
                 <div class="flex lg:flex-1 lg:justify-end space-x-8">
                     <a href="/login.php"
