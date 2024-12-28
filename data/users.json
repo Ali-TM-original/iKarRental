@@ -1,0 +1,20 @@
+{
+    "674723ddf1835": {
+        "email": "samman@something.com",
+        "password": "$2y$10$90Sg2oTe5erPURlNIk04Je9kcsNqK3CF7s16fxqt8NDlPLrYG\/rCG",
+        "fullname": "Sam",
+        "roles": [
+            "user"
+        ],
+        "id": "674723ddf1835"
+    },
+    "677002c54a8a8": {
+        "email": "admin@ikarrental.hu",
+        "password": "$2y$12$Ly8j2zWNPGxKzqcBK79No.2uq24PCkf2w0Bj.7gGjVRoaf1dozWbi",
+        "fullname": "somecoolguy",
+        "roles": [
+            "user"
+        ],
+        "id": "677002c54a8a8"
+    }
+}
