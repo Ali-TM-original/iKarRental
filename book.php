@@ -42,7 +42,7 @@ if ($start_date != null && $end_date != null) {
         $requestedEnd = DateTime::createFromFormat('m-d-Y', $end_date);
 
 
-        if (!($requestedEnd < $existingStart || $requestedStart > $existingEnd)) {
+        if (!($requestedEnd < $existingStart || $requestedStart > $existingEnd) && $b['email'] == $_SESSION['user']['email']) {
             $canBeBooked = false;
             break; // No need to check further if overlap exists
         }

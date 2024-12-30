@@ -86,3 +86,20 @@ function isLoginValid($inputData, &$errors)
 
     return count($errors) === 0;
 }
+
+function isEditValid($inputData, &$errors): bool
+{
+    if (!isset($inputData['fuel']) || !isset($inputData['gear']) || !isset($inputData['year']) || !isset($inputData['passengers']) || !isset($inputData['daily_price_huf']))
+        $errors['global'] = "Missing keys";
+
+    if (strtolower($inputData['fuel']) != "petrol" && strtolower($inputData['fuel']) != "diesel" && strtolower($inputData['fuel']) != "electric")
+        $errors['fuel'] = "Wrong fuel type";
+
+    if (strtolower($inputData['gear']) != "automatic" && strtolower($inputData['gear']) != "manual")
+        $errors['password'] = "Wrong Gear Type";
+
+    if ($inputData['fuel'] == '' || $inputData['gear'] == '' || $inputData['year'] == '' || $inputData['passengers'] == '' || $inputData['daily_price_huf'] == '')
+        $errors['empty'] = 'Empty fields';
+
+    return count($errors) === 0;
+}

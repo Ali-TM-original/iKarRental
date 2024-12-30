@@ -17,5 +17,14 @@
             "admin"
         ],
         "id": "677002c54a8a8"
+    },
+    "6772de616e855": {
+        "email": "ali@ali.com",
+        "password": "$2y$12$JPmHU3MGN8Y132LTMcAp1ektALmpJuCSswPSOby.DoN1cfjbxJz2y",
+        "fullname": "somecoolguy",
+        "roles": [
+            "user"
+        ],
+        "id": "6772de616e855"
     }
 }

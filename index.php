@@ -49,10 +49,17 @@ $allcars = $cs->findAll();
     <div class="flex flex-col justify-center mt-24 ml-4 mr-4 items-center">
         <div class="flex flex-col mt-8 justify-center items-center">
             <h1 class="text-4xl text-white font-bold">Rent Cars Easily!</h1>
-            <a href="/register.php"
-                class="text-black text-sm md:text-lg font-semibold bg-amber-400 hover:bg-amber-500 pt-2 pb-2 pl-4 pr-4 rounded-full mt-4">
-                Registration
-            </a>
+            <?php if (isset($_SESSION['user']) && in_array("admin", $_SESSION['user']['roles'])): ?>
+                <a href="/add.php"
+                    class="text-black text-sm md:text-lg font-semibold bg-amber-400 hover:bg-amber-500 pt-2 pb-2 pl-4 pr-4 rounded-full mt-4">
+                    Add Car
+                </a>
+            <?php else: ?>
+                <a href="/register.php"
+                    class="text-black text-sm md:text-lg font-semibold bg-amber-400 hover:bg-amber-500 pt-2 pb-2 pl-4 pr-4 rounded-full mt-4">
+                    Registration
+                </a>
+            <?php endif; ?>
         </div>
         <!-- FORM component -->
         <div class="flex-col flex md:flex-row mt-8 items-center justify-center">
@@ -122,8 +129,13 @@ $allcars = $cs->findAll();
 
                             <?php if (isset($_SESSION['user']) && in_array("admin", $_SESSION['user']['roles'])): ?>
                                 <a href="<?php echo 'delete.php?id=' . $car['id']; ?>"
-                                    class="absolute top-2 left-2 text-sm text-white bg-red-500 hover:bg-red-600 pl-8 pr-8 pt-2 pb-2 rounded">
+                                    class="absolute top-2 left-2 text-sm text-white bg-red-500 hover:bg-red-600 pl-8 pr-8 pt-2 pb-2 rounded group">
                                     Delete
+                                    <!-- Tooltip -->
+                                    <span
+                                        class="absolute top-10 left-1/2 transform -translate-x-1/2 text-xs text-white bg-gray-800 p-4 rounded opacity-0 group-hover:opacity-100">
+                                        Warning: This will delete all the bookings as well
+                                    </span>
                                 </a>
 
                                 <!-- Top-Right Anchor (Edit) -->
@@ -160,8 +172,6 @@ $allcars = $cs->findAll();
             <?php endforeach ?>
         </div>
     </div>
-
-
 </body>
 <!-- ADD AT END CAUSE THIS IS CLIENT SIDED -->
 <script type="text/javascript" src="./js/index.js"></script>
