@@ -100,7 +100,4 @@ foreach ($allcars as $car) {
 
 
 </body>
-<!-- ADD AT END CAUSE THIS IS CLIENT SIDED -->
-<script type="text/javascript" src="./js/index.js"></script>
-
 </html>
