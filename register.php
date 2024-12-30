@@ -59,7 +59,7 @@ if (count($_POST) > 0) {
             <!-- Button Container -->
             <?php if (isset($_SESSION['user'])): ?>
                 <div class="flex lg:flex-1 lg:justify-end space-x-8">
-                    <a href="/login.php"
+                    <a href="/profile.php"
                         class="text-black text-sm md:text-lg font-semibold bg-amber-400 hover:bg-amber-500 pt-2 pb-2 pl-4 pr-4 rounded-full">Profile</a>
                     <a href="/logout.php" class="text-sm md:text-lg font-semibold pt-2 pb-2 pl-4 pr-4">Log out</a>
                 </div>

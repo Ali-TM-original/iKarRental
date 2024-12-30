@@ -13,7 +13,8 @@
         "password": "$2y$12$Ly8j2zWNPGxKzqcBK79No.2uq24PCkf2w0Bj.7gGjVRoaf1dozWbi",
         "fullname": "somecoolguy",
         "roles": [
-            "user"
+            "user",
+            "admin"
         ],
         "id": "677002c54a8a8"
     }

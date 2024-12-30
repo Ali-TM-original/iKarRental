@@ -1,7 +1,11 @@
 <?php
 include_once("services/redirection.php");
+include_once("utils/carstorage.php");
 
 session_start();
+$cs = new CarStorage();
+
+$allcars = $cs->findAll();
 ?>
 
 
@@ -28,7 +32,7 @@ session_start();
             <!-- Button Container -->
             <?php if (isset($_SESSION['user'])): ?>
                 <div class="flex lg:flex-1 lg:justify-end space-x-8">
-                    <a href="/login.php"
+                    <a href="/profile.php"
                         class="text-black text-sm md:text-lg font-semibold bg-amber-400 hover:bg-amber-500 pt-2 pb-2 pl-4 pr-4 rounded-full">Profile</a>
                     <a href="/logout.php" class="text-sm md:text-lg font-semibold pt-2 pb-2 pl-4 pr-4">Log out</a>
                 </div>
@@ -104,8 +108,56 @@ session_start();
                     Filter
                 </button>
             </form>
+        </div>
+
+        <div class="flex flex-wrap justify-center mt-10">
+            <?php foreach ($allcars as $car): ?>
+                <div class="p-4 max-w-sm">
+                    <div class="rounded-lg overflow-hidden shadow-lg bg-[#42404e] relative">
+                        <!-- Image Section -->
+                        <div class="relative">
+                            <img class="w-full h-48 object-cover" src="<?php echo $car['image']; ?>" alt="Nissan Altima" />
 
 
+
+                            <?php if (isset($_SESSION['user']) && in_array("admin", $_SESSION['user']['roles'])): ?>
+                                <a href="<?php echo 'delete.php?id=' . $car['id']; ?>"
+                                    class="absolute top-2 left-2 text-sm text-white bg-red-500 hover:bg-red-600 pl-8 pr-8 pt-2 pb-2 rounded">
+                                    Delete
+                                </a>
+
+                                <!-- Top-Right Anchor (Edit) -->
+                                <a href="<?php echo 'edit.php?id=' . $car['id']; ?>"
+                                    class="absolute top-2 right-2 text-sm text-black bg-white hover:bg-gray-100 pl-8 pr-8 pt-2 pb-2 rounded">
+                                    Edit
+                                </a>
+                            <?php endif; ?>
+                            </nav>
+                        </div>
+
+                        <!-- Content Section -->
+                        <div class="flex flex-col m-4">
+                            <div class="flex justify-between items-center">
+                                <h2 class="text-lg text-gray-200">
+                                    <?php echo $car["brand"]; ?>
+                                    <span class="font-bold text-white"><?php echo $car["model"]; ?></span>
+                                </h2>
+                                <p class="text-xl font-semibold text-gray-900 dark:text-white">
+                                    <?php echo $car["daily_price_huf"]; ?> Ft
+                                </p>
+                            </div>
+                            <p class="text-gray-700 dark:text-gray-400 mt-2">
+                                <?php echo $car["passengers"]; ?> - <?php echo $car["transmission"]; ?>
+                            </p>
+                            <a href="<?php echo 'book.php?id=' . $car['id']; ?>"
+                                class="text-black text-sm md:text-lg text-center font-semibold bg-amber-400 hover:bg-amber-500 mt-2 pt-2 pb-2 pl-4 pr-4 rounded-full">
+                                Book
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            <?php endforeach ?>
         </div>
     </div>
 
