@@ -22,7 +22,7 @@ if (count($_POST) > 0) {
         // PASWORD: Pa$$word1234
 
         $auth = new Auth(new UserStorage());
-
+        
         if ($auth->user_exists($data['email']))
             $errors[] = "User already exists";
         elseif (strcmp($data['password'], $_POST['passwordagain']) != 0) {
@@ -72,7 +72,13 @@ if (count($_POST) > 0) {
             <?php endif; ?>
         </nav>
     </header>
-
+    <?php foreach ($errors as $err): ?>
+        <div id="alert"
+            class="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 p-4 text-sm text-red-800 rounded-lg bg-red-500 text-white max-w-sm transition-opacity duration-500 opacity-100"
+            role="alert">
+            <span class="font-medium">Danger alert!</span> <?php echo $err ?>
+        </div>
+    <?php endforeach ?>
     <!-- Body Content -->
     <div class="flex flex-col items-center justify-center mt-16">
         <h1 class="text-6xl text-white font-bold">Registration</h1>
@@ -120,5 +126,16 @@ if (count($_POST) > 0) {
     </div>
 
 </body>
+<script>
+    setTimeout(() => {
+        const alert = document.getElementById('alert');
+        if (alert) {
+            alert.classList.add('opacity-0');
+            setTimeout(() => {
+                alert.style.display = 'none';
+            }, 500);
+        }
+    }, 5000);
+</script>
 
 </html>

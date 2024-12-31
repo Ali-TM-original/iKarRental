@@ -60,9 +60,9 @@ function isUserValid($inputData, &$errors)
     if (!preg_match($nameRegex, $inputData['fullname']))
         $errors[] = "Invalid name";
 
-    // $passRegex = '/^(?=.*[0-9])(?=.*[!@#$%&])[A-Za-z0-9@$!&#]{8,}$/';
-    // if (!preg_match($passRegex, $inputData['password']))
-    //     $errors[] = "Invalid password";
+    $passRegex = '/^(?=.*[0-9])(?=.*[!@#$%&])[A-Za-z0-9@$!&#]{8,}$/';
+    if (!preg_match($passRegex, $inputData['password']))
+        $errors[] = "Invalid password";
 
     return count($errors) === 0;
 }

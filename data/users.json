@@ -26,5 +26,14 @@
             "user"
         ],
         "id": "6772de616e855"
+    },
+    "6773c31e75333": {
+        "email": "shahzaibaliofficial0@gmail.com",
+        "password": "$2y$12$togtJL\/aKidRrOAPsoUkDO4Ez5iUnhAJfWgFDxePTVcf5XeLvHDQa",
+        "fullname": "Shahzaib Ali",
+        "roles": [
+            "user"
+        ],
+        "id": "6773c31e75333"
     }
 }

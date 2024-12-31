@@ -116,42 +116,47 @@ if (in_array("admin", $_SESSION['user']['roles'])) {
             <?php endforeach ?>
         </div>
     </div>
-    <div class="flex flex-row items-center justify-center text-white">
-        <h1 class="text-5xl font-bold">All Bookings</h1>
-    </div>
-    <div class="flex flex-wrap justify-center mt-8">
-        <?php foreach ($allbookedCars as $car): ?>
-            <div class="p-4 max-w-sm">
-                <div class="rounded-lg overflow-hidden shadow-lg bg-[#42404e] relative">
-                    <!-- Image Section -->
-                    <div class="relative">
-                        <img class="w-full h-48 object-cover" src="<?php echo $car['image']; ?>" alt="Nissan Altima" />
-                    </div>
 
-                    <!-- Content Section -->
-                    <div class="flex flex-col m-4">
-                        <div class="flex justify-between items-center">
-                            <h2 class="text-lg text-gray-200">
-                                Booked By
-                                <span class="font-bold text-white"><?php echo $car['email']; ?></span>
-                            </h2>
+
+    <?php if (in_array("admin", $_SESSION['user']['roles'])): ?>
+        <div class="flex flex-row items-center justify-center text-white">
+            <h1 class="text-5xl font-bold">All Bookings</h1>
+        </div>
+
+        <div class="flex flex-wrap justify-center mt-8">
+            <?php foreach ($allbookedCars as $car): ?>
+                <div class="p-4 max-w-sm">
+                    <div class="rounded-lg overflow-hidden shadow-lg bg-[#42404e] relative">
+                        <!-- Image Section -->
+                        <div class="relative">
+                            <img class="w-full h-48 object-cover" src="<?php echo $car['image']; ?>" alt="Nissan Altima" />
                         </div>
-                        <p class="text-gray-700 dark:text-gray-400 mt-2">
-                            From <?php echo $car["start_date"]; ?>
-                        </p>
-                        <p class="text-gray-700 dark:text-gray-400 mt-2">
-                            Till <?php echo $car["end_date"]; ?>
-                        </p>
-                        <a href="<?php echo 'deletebook.php?id=' . $car['booking_id']; ?>"
-                            class="text-black text-sm md:text-lg text-center font-semibold bg-amber-400 hover:bg-amber-500 mt-2 pt-2 pb-2 pl-4 pr-4 rounded-full">
-                            Delete Booking
-                        </a>
+
+                        <!-- Content Section -->
+                        <div class="flex flex-col m-4">
+                            <div class="flex justify-between items-center">
+                                <h2 class="text-lg text-gray-200">
+                                    Booked By
+                                    <span class="font-bold text-white"><?php echo $car['email']; ?></span>
+                                </h2>
+                            </div>
+                            <p class="text-gray-700 dark:text-gray-400 mt-2">
+                                From <?php echo $car["start_date"]; ?>
+                            </p>
+                            <p class="text-gray-700 dark:text-gray-400 mt-2">
+                                Till <?php echo $car["end_date"]; ?>
+                            </p>
+                            <a href="<?php echo 'deletebook.php?id=' . $car['booking_id']; ?>"
+                                class="text-black text-sm md:text-lg text-center font-semibold bg-amber-400 hover:bg-amber-500 mt-2 pt-2 pb-2 pl-4 pr-4 rounded-full">
+                                Delete Booking
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-        <?php endforeach ?>
-    </div>
+            <?php endforeach ?>
+        </div>
+    <?php endif; ?>
 
 
 </body>
