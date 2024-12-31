@@ -108,5 +108,16 @@
         "passengers": 7,
         "daily_price_huf": 48000,
         "image": "https:\/\/media.ed.edmunds-media.com\/tesla\/model-x\/2024\/oem\/2024_tesla_model-x_4dr-suv_plaid_fq_oem_1_815.jpg"
+    },
+    "6773b31d29c55": {
+        "brand": "Toyota",
+        "model": "Corolla",
+        "year": 2018,
+        "transmission": "Manual",
+        "fuel_type": "Petrol",
+        "passengers": 4,
+        "daily_price_huf": 1600,
+        "image": "https:\/\/scontent.fbud6-4.fna.fbcdn.net\/v\/t1.6435-9\/78906724_3028345750526447_3106707079654539264_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=833d8c&_nc_ohc=3k-iG-ShVC4Q7kNvgGsU0_q&_nc_zt=23&_nc_ht=scontent.fbud6-4.fna&_nc_gid=AWJn7xBM8yLayJ1yByI2eRD&oh=00_AYAPLapMcaEDSwNf6qOOA5w4jZ-PPb-WIxn6SKvgf3uXyw&oe=679B0F7A",
+        "id": "6773b31d29c55"
     }
 }

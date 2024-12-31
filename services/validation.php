@@ -103,3 +103,23 @@ function isEditValid($inputData, &$errors): bool
 
     return count($errors) === 0;
 }
+
+function isCarValid($inputData, &$errors): bool
+{
+    if (!isset($inputData['brand']) || !isset($inputData['model']) || !isset($inputData['year']) || !isset($inputData['fuel']) || !isset($inputData['gear']) || !isset($inputData['passengers']) || !isset($inputData['daily_price_huf']) || !isset($inputData['image']))
+        $errors['global'] = "Missing keys";
+
+    if (strtolower($inputData['fuel']) != "petrol" && strtolower($inputData['fuel']) != "diesel" && strtolower($inputData['fuel']) != "electric")
+        $errors['fuel'] = "Wrong fuel type";
+
+    if (strtolower($inputData['gear']) != "automatic" && strtolower($inputData['gear']) != "manual")
+        $errors['password'] = "Wrong Gear Type";
+
+    if ($inputData['fuel'] == '' || $inputData['gear'] == '' || $inputData['year'] == '' || $inputData['passengers'] == '' || $inputData['daily_price_huf'] == '')
+        $errors['empty'] = 'Empty fields';
+
+    if (filter_var($inputData['image'], FILTER_VALIDATE_URL) == false)
+        $errors['image'] = 'Image must be a url';
+
+    return count($errors) === 0;
+}

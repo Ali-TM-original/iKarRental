@@ -1,6 +1,5 @@
 <?php
 include_once("utils/auth.php");
-include_once("utils/carstorage.php");
 include_once("utils/bookingstorage.php");
 include_once("services/redirection.php");
 
@@ -10,12 +9,7 @@ if (!isset($_SESSION['user']) || !in_array("admin", $_SESSION['user']['roles']))
 }
 $id = isset($_GET['id']) ? $_GET['id'] : null;
 
-// Deleting the car delets all the bookings as well
-$c = new CarStorage();
 $b = new BookingStorage();
-$c->deleteMany(function ($car) use ($id) {
-    return $car['id'] === $id; // Filter by matching `id`
-});
 
 $b->deleteMany(function ($car) use ($id) {
     return $car['id'] === $id; // Filter by matching `id`

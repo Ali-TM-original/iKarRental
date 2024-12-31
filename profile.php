@@ -9,6 +9,7 @@ if (!isset($_SESSION['user'])) {
 }
 
 $userCars = [];
+$allbookedCars = [];
 $cs = new CarStorage();
 $booking = new BookingStorage();
 $allcars = $cs->findAll();
@@ -22,6 +23,24 @@ foreach ($allcars as $car) {
     // Check if $val is not null
     if ($val != null) {
         $userCars[] = $car; // Add the car to $userCars if a matching booking is found
+    }
+}
+
+if (in_array("admin", $_SESSION['user']['roles'])) {
+    foreach ($allcars as $car) {
+        // Use the correct syntax for associative array creation
+        $val = $booking->findOne([
+            'id' => $car['id'],
+        ]);
+
+        // Check if $val is not null
+        if ($val != null) {
+            $car['start_date'] = $val['start_date'];
+            $car['end_date'] = $val['end_date'];
+            $car['email'] = $val['email'];
+            $car['booking_id'] = $val['id'];
+            $allbookedCars[] = $car; // Add the car to $userCars if a matching booking is found
+        }
     }
 }
 
@@ -67,7 +86,7 @@ foreach ($allcars as $car) {
             </div>
             <div class="text-white ml-8 text-center">
                 <h1 class="text-2xl font-semibold mt-4">Logged in as</h1>
-                <h2 class="text-3xl font-bold">JOHN DOE</h2>
+                <h2 class="text-3xl font-bold"><?php echo $_SESSION['user']['fullname']; ?></h2>
             </div>
         </div>
         <div class="flex flex-wrap justify-center items-center mt-10">
@@ -97,7 +116,44 @@ foreach ($allcars as $car) {
             <?php endforeach ?>
         </div>
     </div>
+    <div class="flex flex-row items-center justify-center text-white">
+        <h1 class="text-5xl font-bold">All Bookings</h1>
+    </div>
+    <div class="flex flex-wrap justify-center mt-8">
+        <?php foreach ($allbookedCars as $car): ?>
+            <div class="p-4 max-w-sm">
+                <div class="rounded-lg overflow-hidden shadow-lg bg-[#42404e] relative">
+                    <!-- Image Section -->
+                    <div class="relative">
+                        <img class="w-full h-48 object-cover" src="<?php echo $car['image']; ?>" alt="Nissan Altima" />
+                    </div>
+
+                    <!-- Content Section -->
+                    <div class="flex flex-col m-4">
+                        <div class="flex justify-between items-center">
+                            <h2 class="text-lg text-gray-200">
+                                Booked By
+                                <span class="font-bold text-white"><?php echo $car['email']; ?></span>
+                            </h2>
+                        </div>
+                        <p class="text-gray-700 dark:text-gray-400 mt-2">
+                            From <?php echo $car["start_date"]; ?>
+                        </p>
+                        <p class="text-gray-700 dark:text-gray-400 mt-2">
+                            Till <?php echo $car["end_date"]; ?>
+                        </p>
+                        <a href="<?php echo 'deletebook.php?id=' . $car['booking_id']; ?>"
+                            class="text-black text-sm md:text-lg text-center font-semibold bg-amber-400 hover:bg-amber-500 mt-2 pt-2 pb-2 pl-4 pr-4 rounded-full">
+                            Delete Booking
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        <?php endforeach ?>
+    </div>
 
 
 </body>
+
 </html>

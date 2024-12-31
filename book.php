@@ -4,9 +4,6 @@ include_once("utils/carstorage.php");
 include_once("utils/bookingstorage.php");
 
 session_start();
-if (!isset($_SESSION['user'])) {
-    redirect('login.php');
-}
 
 $id = isset($_GET['id']) ? $_GET['id'] : null;
 $start_date = isset($_GET['start_date']) ? $_GET['start_date'] : null;
@@ -18,16 +15,19 @@ if ($id == null) {
 
 $cs = new CarStorage();
 $car = $cs->findOne([
-    'id' => intval($id),
+    'id' => $id,
 ]);
 
 if ($car == null) {
     redirect('index.php');
 }
 
-
+$showerror = false;
 $canBeBooked = true;
 if ($start_date != null && $end_date != null) {
+    if (!isset($_SESSION['user'])) {
+        redirect('login.php');
+    }
     // Try to book
     $booking = new BookingStorage();
 
@@ -59,6 +59,8 @@ if ($start_date != null && $end_date != null) {
 
         $booking->add($data, $car['id']);
 
+    } else {
+        $showerror = true;
     }
 
 }
@@ -100,6 +102,14 @@ if ($start_date != null && $end_date != null) {
             <?php endif; ?>
         </nav>
     </header>
+    <?php if ($showerror): ?>
+        <div id="alert"
+            class="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 p-4 text-sm text-red-800 rounded-lg bg-red-500 text-white max-w-sm transition-opacity duration-500 opacity-100"
+            role="alert">
+            <span class="font-medium">Danger alert!</span> Car Cannot be booked on this date
+        </div>
+    <?php endif; ?>
+
     <?php if ($canBeBooked == false && $start_date != null): ?>
         <div class="flex flex-col items-center justify-center h-screen text-white">
             <!-- Icon -->
@@ -208,6 +218,17 @@ if ($start_date != null && $end_date != null) {
 
     startDateInput.addEventListener('change', updateBookingLink);
     endDateInput.addEventListener('change', updateBookingLink);
+
+    setTimeout(() => {
+        const alert = document.getElementById('alert');
+        if (alert) {
+            alert.classList.add('opacity-0');
+            setTimeout(() => {
+                alert.style.display = 'none';
+            }, 500);
+        }
+    }, 5000);
+
 </script>
 
 </html>

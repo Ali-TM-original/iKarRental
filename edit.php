@@ -40,9 +40,6 @@ if (isset($_GET['id'])) {
             // print_r($data);
             $cs->update($id, $data);
             redirect('index.php');
-        } else {
-            // Handle This Shit
-            print_r($errors);
         }
     }
 }
@@ -86,6 +83,14 @@ if (isset($_GET['id'])) {
             <?php endif; ?>
         </nav>
     </header>
+
+    <?php foreach ($errors as $err): ?>
+        <div id="alert"
+            class="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 p-4 text-sm text-red-800 rounded-lg bg-red-500 text-white max-w-sm transition-opacity duration-500 opacity-100"
+            role="alert">
+            <span class="font-medium">Danger alert!</span> <?php echo $err ?>
+        </div>
+    <?php endforeach ?>
 
     <?php if ($updated == true): ?>
         <div class="flex flex-col items-center justify-center h-screen text-white">
@@ -188,5 +193,16 @@ if (isset($_GET['id'])) {
 
     <?php endif; ?>
 </body>
+<script>
+    setTimeout(() => {
+        const alert = document.getElementById('alert');
+        if (alert) {
+            alert.classList.add('opacity-0');
+            setTimeout(() => {
+                alert.style.display = 'none';
+            }, 500);
+        }
+    }, 5000);
+</script>
 
 </html>
