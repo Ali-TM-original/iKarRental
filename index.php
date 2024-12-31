@@ -1,11 +1,78 @@
 <?php
 include_once("services/redirection.php");
 include_once("utils/carstorage.php");
+include_once("utils/bookingstorage.php");
 
 session_start();
 $cs = new CarStorage();
+$bk = new BookingStorage();
 
 $allcars = $cs->findAll();
+if (count($_GET) > 0) {
+    $filters = [
+        'passengers' => $_GET['seats'] ?? null,
+        'transmission' => $_GET['gear'] ?? null,
+        'min_price' => $_GET['min_price'] ?? null,
+        'max_price' => $_GET['max_price'] ?? null,
+        'from' => $_GET['from'] ?? null,
+        'until' => $_GET['until'] ?? null,
+    ];
+
+    // Remove empty filters
+    $filters = array_filter($filters, function ($value) {
+        return $value !== null && $value !== '';
+    });
+
+    // Apply filters to $allcars
+    $filteredCars = array_filter($allcars, function ($car) use ($filters) {
+        // Check passengers
+        if (isset($filters['passengers']) && $car['passengers'] < $filters['passengers']) {
+            return false;
+        }
+
+        // Check transmission
+        if (isset($filters['transmission']) && strtolower($car['transmission']) !== strtolower($filters['transmission'])) {
+            return false;
+        }
+
+        // Check minimum price
+        if (isset($filters['min_price']) && $car['daily_price_huf'] < $filters['min_price']) {
+            return false;
+        }
+
+        // Check maximum price
+        if (isset($filters['max_price']) && $car['daily_price_huf'] > $filters['max_price']) {
+            return false;
+        }
+
+        return true;
+    });
+    $allcars = $filteredCars;
+    if (isset($filters['from']) && isset($filters['until'])) {
+        $temp = [];
+        foreach ($allcars as $car) {
+            $res = $bk->findById($car['id']);
+            if ($res == null) {
+                $temp[] = $car;
+            } else {
+                $existingStart = DateTime::createFromFormat('m-d-Y', $res['start_date']);
+                $existingEnd = DateTime::createFromFormat('m-d-Y', $res['end_date']);
+                $requestedStart = DateTime::createFromFormat('m-d-Y', $filters['from']);
+                $requestedEnd = DateTime::createFromFormat('m-d-Y', $filters['until']);
+                if ($requestedEnd < $existingStart || $requestedStart > $existingEnd) {
+                    $temp[] = $car;
+                }
+            }
+
+        }
+        $allcars = $temp;
+        // print_r($allcars);
+    }
+
+}
+
+
+
 ?>
 
 
