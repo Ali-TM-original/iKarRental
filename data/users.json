@@ -1,13 +1,4 @@
 {
-    "674723ddf1835": {
-        "email": "samman@something.com",
-        "password": "$2y$10$90Sg2oTe5erPURlNIk04Je9kcsNqK3CF7s16fxqt8NDlPLrYG\/rCG",
-        "fullname": "Sam",
-        "roles": [
-            "user"
-        ],
-        "id": "674723ddf1835"
-    },
     "677002c54a8a8": {
         "email": "admin@ikarrental.hu",
         "password": "$2y$12$Ly8j2zWNPGxKzqcBK79No.2uq24PCkf2w0Bj.7gGjVRoaf1dozWbi",
@@ -18,22 +9,4 @@
         ],
         "id": "677002c54a8a8"
     },
-    "6772de616e855": {
-        "email": "ali@ali.com",
-        "password": "$2y$12$JPmHU3MGN8Y132LTMcAp1ektALmpJuCSswPSOby.DoN1cfjbxJz2y",
-        "fullname": "somecoolguy",
-        "roles": [
-            "user"
-        ],
-        "id": "6772de616e855"
-    },
-    "6773c31e75333": {
-        "email": "shahzaibaliofficial0@gmail.com",
-        "password": "$2y$12$togtJL\/aKidRrOAPsoUkDO4Ez5iUnhAJfWgFDxePTVcf5XeLvHDQa",
-        "fullname": "Shahzaib Ali",
-        "roles": [
-            "user"
-        ],
-        "id": "6773c31e75333"
-    }
 }
