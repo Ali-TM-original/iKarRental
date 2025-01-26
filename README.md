@@ -1,8 +1,8 @@
 <Student Shahzaib Ali> 
 <Student D946BF>
 
-Web Programming – PHP Assignment
-
+# Web Programming – PHP Assignment
+![image](./assets/preview/collage.jpg)
 
 ### Minimum Requirements (without these, the submission will not be accepted, 6 points) 
 - [x] 0.0 points README.md file: completed and uploaded 
